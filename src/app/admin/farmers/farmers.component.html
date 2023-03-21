@@ -1,0 +1,134 @@
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card ">
+        <div class="card-body d-flex justify-content-between">
+            <h5 class="card-title">Farmers</h5>
+            
+            <button type="button" class="btn btn-primary btn-sm " data-bs-toggle="modal"
+            data-bs-target="#exampleModal">Add Farmer<i class="ti-arrow-circle-right ms-1"></i></button>
+
+        </div>
+    </div>
+</div>
+
+        <!-- Modal starts -->
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Farmers</h4>
+
+                                <form [formGroup]="formdata" (ngSubmit)="submit(formdata.value)" class="forms-sample">
+                                    <div class="row">
+                                        <div class="form-group col-lg-4">
+                                            <label for="name">Name</label>
+                                            <input type="text" class="form-control" formControlName="name" id="name"
+                                                placeholder="Name">
+                                            <em class="error text-danger small"
+                                                *ngIf="formdata.controls.name.touched && formdata.controls.name.invalid">Please
+                                                enter name</em>
+                                        </div>
+
+                                        <div class="form-group  col-lg-4">
+                                            <label for="email">Email address</label>
+                                            <input type="text" class="form-control" formControlName="email" id="email"
+                                                placeholder="Email">
+                                            <em class="error text-danger small"
+                                                *ngIf="formdata.controls.email.touched && formdata.controls.email.invalid">Please
+                                                enter email</em>
+                                        </div>
+                                        <div class="form-group  col-lg-4">
+                                            <label for="mobile">Mobile Number</label>
+                                            <input type="text" class="form-control" formControlName="mobileno"
+                                                id="mobile" placeholder="Mobile no">
+                                            <em class="error text-danger small"
+                                                *ngIf="formdata.controls.mobileno.touched && formdata.controls.mobileno.invalid">Please
+                                                enter mobileno</em>
+                                        </div>
+
+                                        <div class="form-group  col-lg-4">
+                                            <label for="space">Land-space</label>
+                                            <input type="text" class="form-control" formControlName="landspace"
+                                                id="space" placeholder="Land Space">
+                                            <em class="error text-danger small"
+                                                *ngIf="formdata.controls.landspace.touched && formdata.controls.landspace.invalid">Please
+                                                enter landspace</em>
+
+                                        </div>
+                                        <div class="form-group  col-lg-4">
+                                            <label for="pass">Password</label>
+                                            <input type="text" class="form-control" formControlName="password" id="pass"
+                                                placeholder="Password">
+                                            <em class="error text-danger small"
+                                                *ngIf="formdata.controls.password.touched && formdata.controls.password.invalid">Please
+                                                enter password</em>
+                                        </div>
+
+                                    </div>
+                                    <input type="submit" [disabled]="formdata.invalid" value="Save"
+                                        class="mt-1 btn btn-primary">&nbsp;&nbsp;
+                                    <input type="reset" id="btnclose" data-bs-dismiss="modal" [disabled]="formdata.invalid" value="Cancel"
+                                        class="mt-1 ml-2 btn btn-danger">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        <!-- Modal Ends -->
+    
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Farmers</h4>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>No.</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile-No</th>
+                                <th>Land-Space</th>
+                                <th>Password</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of result | paginate: { itemsPerPage: itemsPerPage, currentPage: p } let i = index">
+                                <td>
+                                    <button (click)="edit(data._id)"
+                                        class="mb-2 mr-2 btn-icon btn-icon-only btn-pill btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"><i
+                                            class="ti-pencil"> </i></button>&nbsp;&nbsp;&nbsp;
+                                    <button (click)="delete(data._id)"
+                                        class="mb-2 mr-2 btn-icon btn-icon-only btn-pill btn btn-danger"><i
+                                            class="ti-trash"> </i></button>
+                                </td>
+                                <td>{{i+1}}</td>
+                                <td>{{data.name}}</td>
+                                <td>{{data.email}}</td>
+                                <td>{{data.mobileno}}</td>
+                                <td>{{data.landspace}}</td>
+                                <td>{{data.password}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="mt-3 d-flex justify-content-center">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
